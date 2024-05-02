@@ -3,6 +3,8 @@ package it.tsp.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.management.RuntimeErrorException;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -90,6 +92,7 @@ public class Account extends BaseEntity implements Serializable {
 
     public void setCredit(BigDecimal credit) {
         this.credit = credit;
+        throw new RuntimeException("Unable to save amount!");
     }
 
     
