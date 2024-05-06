@@ -6,6 +6,7 @@ import java.util.Optional;
 import it.tsp.entity.Account;
 import it.tsp.entity.Recharge;
 import it.tsp.entity.RechargeException;
+import it.tsp.entity.Transaction;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -67,7 +68,15 @@ public class Store {
         return account==null ? Optional.empty() : Optional.of(account);
     }
 
-    
-
-
+    public static Transaction saveTransaction(Transaction tr) {
+       if (em.getTransaction().isActive()) {
+            return em.merge(tr);
+            
+       }
+       em.getTransaction().begin();
+       Transaction saved = em.merge(tr);
+       em.getTransaction().commit();
+       return saved;
+       
+    }
 }

@@ -99,5 +99,20 @@ public class Account extends BaseEntity implements Serializable {
                 + ", credit=" + credit + "]";
     }
 
+    public void increaseCredit(BigDecimal amount) {
+        this.credit = this.credit.add(amount);
+    }
+
+    public void decreaseCredit(BigDecimal amount) {
+        this.credit = this.credit.subtract(amount);
+    }
+
+    public boolean hasSufficientCredit(BigDecimal amount) {
+        return this.credit.compareTo(amount) > 0;
+    }
+
+    
+    
+
 
 }

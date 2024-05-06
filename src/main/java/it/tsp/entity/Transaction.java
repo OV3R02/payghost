@@ -14,7 +14,8 @@ import jakarta.persistence.Table;
 
 public class Transaction extends BaseEntity implements Serializable {
 
-    
+    public Transaction() {
+    }
 
     public Transaction(Account senderAccount, Account receiverAccount, BigDecimal amount) {
         this.senderAccount = senderAccount;
@@ -27,7 +28,7 @@ public class Transaction extends BaseEntity implements Serializable {
 
     @ManyToOne(optional = false)
     private Account receiverAccount;
-    
+
     @Column(precision = 6, scale = 2, nullable = false)
     private BigDecimal amount;
 
@@ -36,30 +37,35 @@ public class Transaction extends BaseEntity implements Serializable {
     public Account getSenderAccount() {
         return senderAccount;
     }
+
     public void setSenderAccount(Account senderAccount) {
         this.senderAccount = senderAccount;
     }
+
     public Account getReceiverAccount() {
         return receiverAccount;
     }
+
     public void setReceiverAccount(Account receiverAccount) {
         this.receiverAccount = receiverAccount;
     }
+
     public BigDecimal getAmount() {
         return amount;
     }
+
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
     public LocalDate getSendingAT() {
         return sendingAT;
     }
+
     public void setSendingAT(LocalDate sendingAT) {
         this.sendingAT = sendingAT;
     }
 
-
-    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -68,6 +74,7 @@ public class Transaction extends BaseEntity implements Serializable {
         result = prime * result + ((receiverAccount == null) ? 0 : receiverAccount.hashCode());
         return result;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -96,6 +103,4 @@ public class Transaction extends BaseEntity implements Serializable {
                 + amount + ", sendingAT=" + sendingAT + "]";
     }
 
-    
-    
 }

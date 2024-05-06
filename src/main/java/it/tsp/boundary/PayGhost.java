@@ -45,17 +45,63 @@ public class PayGhost {
 
      public static void doRecharge(long accountId, BigDecimal amount) {
           try {
-               // nuovo oggetto recharge
-               Account found = Store.findAccountById(accountId).orElseThrow(() -> new RechargeException("Account not found!"));
+               // Find account id
+               Account found = Store.findAccountById(accountId)
+                    .orElseThrow(() -> new RechargeException("Account not found!"));
+               
+               // Opens transaction
+               Store.beginTran();
+
+               // Recharge saved based on amount gave to account
+               Store.saveRecharge(new Recharge(found, amount));
+
+               // increase account credit based on amount
+               found.increaseCredit(amount);
+
+               // Saves account info
+               Store.saveAccount(found);
+
+               // Closes transaction
+               Store.commitTran();
+               
            } catch (Exception e) {
+               Store.rollTran();
                throw new RechargeException("Account not found!");
-           }
+          }
+
      }
 
-     public static void doTransaction(long accountId, BigDecimal amount) {
+     public static void doTransaction(long accountId1, long accountId2, BigDecimal amount) {
           try {
+               // Finds the sender id
+               Account senderAccount = Store.findAccountById(accountId1)
+                    .orElseThrow(() -> new TransactionException("Sender account not found!"));
+
+               // Finds the sender id
+               Account receiverAccount = Store.findAccountById(accountId2)
+                    .orElseThrow(() -> new TransactionException("Receiver account not found!"));
+
+               // Open new transaction
+               Store.beginTran();
+
+               Store.saveTransaction(new Transaction(senderAccount, receiverAccount, amount));
                
+               // Increase credit on receiver account base on the amount 
+               receiverAccount.increaseCredit(amount);
+
+               // decrease credit on sender account based on amount
+               senderAccount.decreaseCredit(amount);
+
+               // Save both accounts
+               Store.saveAccount(senderAccount);
+               Store.saveAccount(receiverAccount);
+
+               // Close transaction
+               Store.commitTran();
+
           } catch (Exception e) {
+               System.out.println(e);
+               Store.rollTran();
                throw new TransactionException("Transaction failed!");
           }
      }
