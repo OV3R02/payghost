@@ -7,12 +7,22 @@ import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+
+
+@NamedQueries({
+    @NamedQuery(name = Transaction.FIND_BY_ACCOUNT_ID, query =  "select e from Transaction e where e.senderAccount.id= :id or e.receiverAccount.id= :id")
+})
 
 @Entity
 @Table(name = "transaction")
 
+
 public class Transaction extends BaseEntity implements Serializable {
+
+    public static final String FIND_BY_ACCOUNT_ID = "Transaction.findByAccountId";
 
     public Transaction() {
     }
@@ -56,6 +66,11 @@ public class Transaction extends BaseEntity implements Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public BigDecimal viewAmount(long accountId){
+        return senderAccount.getID()==accountId ? BigDecimal.valueOf(- amount.doubleValue())
+            : BigDecimal.valueOf(amount.doubleValue());
     }
 
     public LocalDate getSendingAT() {

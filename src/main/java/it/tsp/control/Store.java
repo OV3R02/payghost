@@ -1,11 +1,10 @@
 package it.tsp.control;
 
-import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import it.tsp.entity.Account;
 import it.tsp.entity.Recharge;
-import it.tsp.entity.RechargeException;
 import it.tsp.entity.Transaction;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -36,6 +35,7 @@ public class Store {
         em.getTransaction().commit();
     }
 
+    // Annulla la transazione
     public static void rollTran() {
         if (!em.getTransaction().isActive()) {
             throw new StoreException("Nessuna transazione attiva");
@@ -78,5 +78,11 @@ public class Store {
        em.getTransaction().commit();
        return saved;
        
+    }
+
+    public static List<Transaction> findTransactionByAccount(long accountId) {
+        return em.createNamedQuery(Transaction.FIND_BY_ACCOUNT_ID, Transaction.class)
+                    .setParameter("id", accountId)
+                    .getResultList();
     }
 }

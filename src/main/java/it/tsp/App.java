@@ -1,15 +1,9 @@
 package it.tsp;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 import it.tsp.boundary.PayGhost;
-import it.tsp.boundary.RegistrationException;
-import it.tsp.control.Store;
 import it.tsp.entity.Account;
-import it.tsp.entity.Recharge;
-import jakarta.validation.*;
-
 
 
 /**
@@ -42,12 +36,19 @@ public class App
             "1234", 
             BigDecimal.valueOf(10));
 
+        PayGhost.recharge(saved1.getID(), BigDecimal.valueOf(1000));
+        PayGhost.recharge(saved2.getID(), BigDecimal.valueOf(100));
+
+        PayGhost.sendMoney(saved1.getID(), saved2.getID(), BigDecimal.valueOf(1000));
+
         System.out.println(saved1);
         System.out.println(saved2);
 
-        PayGhost.doRecharge(saved1.getID(), BigDecimal.valueOf(1000));
-        PayGhost.doRecharge(saved2.getID(), BigDecimal.valueOf(100));
+        PayGhost.transactionByUser(saved1.getID()).forEach(v -> System.out.println(String.format("sender: %s, receiver: %s, amount: %s",
+                    v.getSenderAccount().getFullName(), 
+                    v.getReceiverAccount().getFullName(), 
+                    v.viewAmount(saved1.getID()))));
 
-        PayGhost.doTransaction(saved1.getID(), saved2.getID(), BigDecimal.valueOf(1000));
+        
     }
 }

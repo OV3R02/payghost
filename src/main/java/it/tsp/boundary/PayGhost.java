@@ -3,7 +3,6 @@ package it.tsp.boundary;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import it.tsp.control.Store;
 import it.tsp.entity.Account;
@@ -43,7 +42,7 @@ public class PayGhost {
 
      }
 
-     public static void doRecharge(long accountId, BigDecimal amount) {
+     public static void recharge(long accountId, BigDecimal amount) {
           try {
                // Find account id
                Account found = Store.findAccountById(accountId)
@@ -71,7 +70,7 @@ public class PayGhost {
 
      }
 
-     public static void doTransaction(long accountId1, long accountId2, BigDecimal amount) {
+     public static void sendMoney(long accountId1, long accountId2, BigDecimal amount) {
           try {
                // Finds the sender id
                Account senderAccount = Store.findAccountById(accountId1)
@@ -107,7 +106,10 @@ public class PayGhost {
      }
 
      public static List<Transaction> transactionByUser(long accountId) {
-          throw new UnsupportedOperationException("not implement yet..");
+          return Store.findTransactionByAccount(accountId);
      }
 
+    public static Iterable<Transaction> rechargeByUser(long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'rechargeByUser'");
+    }
 }

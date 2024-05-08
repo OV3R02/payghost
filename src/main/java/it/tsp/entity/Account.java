@@ -67,6 +67,10 @@ public class Account extends BaseEntity implements Serializable {
         this.lname = lname;
     }
 
+    public String getFullName(){
+        return fname+" "+lname;
+    }
+
     public String getPwd() {
         return pwd;
     }
@@ -90,6 +94,7 @@ public class Account extends BaseEntity implements Serializable {
     public void setCredit(BigDecimal credit) {
         this.credit = credit;
     }
+    
 
     
 
