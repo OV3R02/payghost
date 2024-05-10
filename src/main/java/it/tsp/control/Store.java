@@ -1,7 +1,15 @@
 package it.tsp.control;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.mysql.cj.xdevapi.Statement;
 
 import it.tsp.entity.Account;
 import it.tsp.entity.Recharge;
@@ -12,6 +20,10 @@ import jakarta.persistence.Persistence;
 
 public class Store {
 
+    private static String URL = "jdbc:mysql://127.0.0.1:3306/?user=payghost";
+    private static String USER = "payghost";
+    private static String PWD = "payghost";
+    
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
     private static EntityManager em = emf.createEntityManager();
 
@@ -84,5 +96,11 @@ public class Store {
         return em.createNamedQuery(Transaction.FIND_BY_ACCOUNT_ID, Transaction.class)
                     .setParameter("id", accountId)
                     .getResultList();
+    }
+
+    public static List<Transaction> jpaFindTransactionByUserId(long accountId){
+        return em.createNamedQuery(Transaction.FIND_BY_ACCOUNT_ID, Transaction.class)
+                .setParameter("ID", accountId)
+                .getResultList();
     }
 }

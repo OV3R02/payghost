@@ -1,9 +1,13 @@
 package it.tsp;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 
 import it.tsp.boundary.PayGhost;
+import it.tsp.control.Store;
 import it.tsp.entity.Account;
+import it.tsp.entity.Transaction;
 
 
 /**
@@ -49,6 +53,6 @@ public class App
                     v.getReceiverAccount().getFullName(), 
                     v.viewAmount(saved1.getID()))));
 
-        
+        List<Transaction> ftbu = Store.jpaFindTransactionByUserId(1);
     }
 }
