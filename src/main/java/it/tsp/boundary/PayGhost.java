@@ -4,15 +4,21 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
-import it.tsp.control.Store;
+import it.tsp.control.AccountStore;
 import it.tsp.entity.Account;
 import it.tsp.entity.Recharge;
 import it.tsp.entity.RechargeException;
 import it.tsp.entity.Transaction;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
+@ApplicationScoped
 public class PayGhost {
 
-     public static Account registration(String fname, String lname, String email, String pwd, String confirmPwd,
+     @Inject
+     AccountStore accountStore;
+
+     public  Account registration(String fname, String lname, String email, String pwd, String confirmPwd,
                BigDecimal credit) {
 
           try {
@@ -20,70 +26,53 @@ public class PayGhost {
                     throw new RegistrationException("The two passwords doesn't match!");
                }
 
-               Store.beginTran();
-
                Account account = new Account(fname, lname, pwd, email);
 
-               Account saved = Store.saveAccount(account);
+               Account saved = accountStore.saveAccount(account);
 
                if (credit.compareTo(BigDecimal.ZERO) > 0) {
                     Recharge recharge = new Recharge(saved, credit);
                     @SuppressWarnings("unused")
-                    Recharge r = Store.saveRecharge(recharge);
+                    Recharge r = accountStore.saveRecharge(recharge);
                     saved.setCredit(credit);
-                    Store.saveAccount(saved);
+                    accountStore.saveAccount(saved);
                }
-               Store.commitTran();
                return saved;
           } catch (Exception e) {
-               Store.rollTran();
                throw new RegistrationException(e.getMessage());
           }
 
      }
 
-     public static void recharge(long accountId, BigDecimal amount) {
+     public void recharge(long accountId, BigDecimal amount) {
           try {
                // Find account id
-               Account found = Store.findAccountById(accountId)
+               Account found = accountStore.findAccountById(accountId)
                     .orElseThrow(() -> new RechargeException("Account not found!"));
-               
-               // Opens transaction
-               Store.beginTran();
 
                // Recharge saved based on amount gave to account
-               Store.saveRecharge(new Recharge(found, amount));
+               accountStore.saveRecharge(new Recharge(found, amount));
 
                // increase account credit based on amount
                found.increaseCredit(amount);
-
-               // Saves account info
-               Store.saveAccount(found);
-
-               // Closes transaction
-               Store.commitTran();
                
            } catch (Exception e) {
-               Store.rollTran();
                throw new RechargeException("Account not found!");
           }
 
      }
 
-     public static void sendMoney(long accountId1, long accountId2, BigDecimal amount) {
+     public void sendMoney(long accountId1, long accountId2, BigDecimal amount) {
           try {
                // Finds the sender id
-               Account senderAccount = Store.findAccountById(accountId1)
+               Account senderAccount = accountStore.findAccountById(accountId1)
                     .orElseThrow(() -> new TransactionException("Sender account not found!"));
 
                // Finds the sender id
-               Account receiverAccount = Store.findAccountById(accountId2)
+               Account receiverAccount = accountStore.findAccountById(accountId2)
                     .orElseThrow(() -> new TransactionException("Receiver account not found!"));
 
-               // Open new transaction
-               Store.beginTran();
-
-               Store.saveTransaction(new Transaction(senderAccount, receiverAccount, amount));
+               accountStore.saveTransaction(new Transaction(senderAccount, receiverAccount, amount));
                
                // Increase credit on receiver account base on the amount 
                receiverAccount.increaseCredit(amount);
@@ -91,22 +80,15 @@ public class PayGhost {
                // decrease credit on sender account based on amount
                senderAccount.decreaseCredit(amount);
 
-               // Save both accounts
-               Store.saveAccount(senderAccount);
-               Store.saveAccount(receiverAccount);
-
-               // Close transaction
-               Store.commitTran();
 
           } catch (Exception e) {
                System.out.println(e);
-               Store.rollTran();
                throw new TransactionException("Transaction failed!");
           }
      }
 
-     public static List<Transaction> transactionByUser(long accountId) {
-          return Store.findTransactionByAccount(accountId);
+     public List<Transaction> transactionByUser(long accountId) {
+          return accountStore.findTransactionByAccount(accountId);
      }
 
     public static Iterable<Transaction> rechargeByUser(long id) {
