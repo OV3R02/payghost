@@ -2,7 +2,7 @@ it\tsp\boundary\AccountResources.class
 it\tsp\boundary\LoginFailedException.class
 it\tsp\control\StoreException.class
 it\tsp\control\RechargeStore.class
-RestConfig.class
+it\tsp\RestConfig.class
 it\tsp\entity\Transaction.class
 it\tsp\boundary\TransactionException.class
 it\tsp\entity\BaseEntity.class

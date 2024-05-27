@@ -1,4 +1,5 @@
 package it.tsp.control;
+import java.util.List;
 import java.util.Optional;
 
 import it.tsp.entity.Account;
@@ -24,5 +25,7 @@ public class AccountStore {
         return account==null ? Optional.empty() : Optional.of(account);
     }
 
-    
+    public List<Account> findAll(){
+        return em.createNamedQuery(Account.FIND_ALL, Account.class).getResultList();
+    }
 }

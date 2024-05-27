@@ -2,8 +2,13 @@ package it.tsp.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
@@ -12,14 +17,19 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 
+@NamedQueries({
+    @NamedQuery(name = Account.FIND_ALL, query = "select e from Account e")
+})
+
 @Entity
 @Table (name = "account")
-
-
 public class Account extends BaseEntity implements Serializable {
 
-    
+    public static final String FIND_ALL = "Account.findAll";
+
+    @JsonbProperty("first-name")
     private String fname;
+    @JsonbProperty("last-name")
     private String lname;
     
     @NotBlank
@@ -27,8 +37,8 @@ public class Account extends BaseEntity implements Serializable {
     @Column(nullable = false, unique = false)
     private String pwd;
 
-    @Email(message = "The email adress is not valid!")
     @NotBlank
+    @Email(message = "The email adress is not valid!")
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -75,6 +85,7 @@ public class Account extends BaseEntity implements Serializable {
         return fname+" "+lname;
     }
 
+    @JsonbTransient
     public String getPwd() {
         return pwd;
     }
