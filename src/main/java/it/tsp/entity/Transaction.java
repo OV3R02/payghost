@@ -19,7 +19,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "transaction")
 
-
 public class Transaction extends BaseEntity implements Serializable {
 
     public static final String FIND_BY_ACCOUNT_ID = "Transaction.findByAccountId";

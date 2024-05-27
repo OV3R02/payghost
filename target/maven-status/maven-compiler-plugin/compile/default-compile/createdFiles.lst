@@ -1,2 +1,15 @@
-it\tsp\App.class
+it\tsp\boundary\AccountResources.class
+it\tsp\boundary\LoginFailedException.class
+it\tsp\control\StoreException.class
+it\tsp\control\RechargeStore.class
+RestConfig.class
+it\tsp\entity\Transaction.class
+it\tsp\boundary\TransactionException.class
+it\tsp\entity\BaseEntity.class
+it\tsp\boundary\RegistrationException.class
+it\tsp\control\AccountStore.class
+it\tsp\boundary\PayGhost.class
+it\tsp\control\TransactionStore.class
+it\tsp\entity\Recharge.class
+it\tsp\entity\RechargeException.class
 it\tsp\entity\Account.class

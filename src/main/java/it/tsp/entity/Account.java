@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -30,6 +31,9 @@ public class Account extends BaseEntity implements Serializable {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Transient
+    private String confirmPwd;
 
     @PositiveOrZero(message = "The credit should be more or equals to 0.")
     @Column(precision = 6, scale = 2)
@@ -77,6 +81,14 @@ public class Account extends BaseEntity implements Serializable {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public void setConfirmPwd(String confirmPwd) {
+        this.confirmPwd = confirmPwd;
+    }
+
+    public String getConfirmPwd() {
+        return confirmPwd;
     }
 
     public String getEmail() {
