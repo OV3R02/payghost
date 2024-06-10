@@ -4,12 +4,17 @@ C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\RestConfig.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\boundary\AccountResources.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\boundary\RegistrationException.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\RechargeException.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\PayghostManager.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\PayghostExceptionMapper.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\AccountStore.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\boundary\TransactionException.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\boundary\PayghostException.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\RechargeStore.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\TransactionStore.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\Account.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\Transaction.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\dto\CreateRechargeDTO.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\dto\CreateTransactionDTO.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\Recharge.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\boundary\PayGhost.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\BaseEntity.java

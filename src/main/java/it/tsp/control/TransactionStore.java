@@ -16,7 +16,7 @@ public class TransactionStore {
     @PersistenceContext(unitName = "payghost")
     private EntityManager em;
 
-    public  Transaction saveTransaction(Transaction tr) {
+    public Transaction saveTransaction(Transaction tr) {
        Transaction saved = this.em.merge(tr);
        return saved;
     }

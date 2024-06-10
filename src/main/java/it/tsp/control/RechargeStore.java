@@ -20,17 +20,12 @@ public class RechargeStore {
         return saved;
     }
 
-    public List<Recharge> findTransactionByAccount(long accountId) {
+    public List<Recharge> findRechargesByAccountId(long accountId) {
         return em.createNamedQuery(Recharge.FIND_BY_ACCOUNT_ID, Recharge.class)
-                    .setParameter("id", accountId)
-                    .getResultList();
-    }
-
-    
-    public List<Recharge> jpaFindTransactionByUserId(long accountId){
-        return em.createNamedQuery(Recharge.FIND_BY_ACCOUNT_ID, Recharge.class)
-                .setParameter("ID", accountId)
+                .setParameter("id", accountId)
                 .getResultList();
     }
+
+   
 
 }
