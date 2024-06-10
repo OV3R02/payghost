@@ -48,9 +48,8 @@ public class AccountResources {
     @Produces(MediaType.TEXT_PLAIN)
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public Response registration(Account account){
-        try {
                if (!Objects.equals(account.getPwd(), account.getConfirmPwd())) {
-                    throw new RegistrationException("The two passwords doesn't match!");
+                    throw new PayghostException("The two passwords doesn't match!");
                }
 
                //Account a1 = new Account(account.getFname(), account.getLname(), account.getPwd(), account.getEmail());
@@ -68,10 +67,6 @@ public class AccountResources {
                     .status(Status.CREATED)
                     .entity(saved.getID())
                     .build();
-                    
-          } catch (Exception e) {
-               throw new RegistrationException(e.getMessage());
-        }
     }
 
     @GET

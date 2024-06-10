@@ -28,4 +28,12 @@ public class AccountStore {
     public List<Account> findAll(){
         return em.createNamedQuery(Account.FIND_ALL, Account.class).getResultList();
     }
+
+    public Optional<Account> findAccountByUsr(String email) {
+        List<Account> result = em.createNamedQuery(Account.FIND_BY_USER, Account.class)
+            .setParameter("email", email)
+            .getResultList();
+        return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
+
+    }
 }

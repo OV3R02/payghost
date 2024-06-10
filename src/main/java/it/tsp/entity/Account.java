@@ -18,7 +18,8 @@ import jakarta.validation.constraints.Size;
 
 
 @NamedQueries({
-    @NamedQuery(name = Account.FIND_ALL, query = "select e from Account e")
+    @NamedQuery(name = Account.FIND_ALL, query = "select e from Account e"),
+    @NamedQuery(name = Account.FIND_BY_USER, query = "select e from Account e WHERE e.email = :email")    
 })
 
 @Entity
@@ -26,6 +27,8 @@ import jakarta.validation.constraints.Size;
 public class Account extends BaseEntity implements Serializable {
 
     public static final String FIND_ALL = "Account.findAll";
+
+    public static final String FIND_BY_USER = "Account.findByUser";
 
     @JsonbProperty("first-name")
     private String fname;

@@ -3,10 +3,12 @@ package it.tsp.control;
 import java.math.BigDecimal;
 
 import it.tsp.boundary.PayghostException;
+import it.tsp.dto.CredentialDTO;
 import it.tsp.entity.Account;
 import it.tsp.entity.Transaction;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 
 @RequestScoped
 public class PayghostManager {
@@ -31,5 +33,15 @@ public class PayghostManager {
         accountStore.saveAccount(senderAccount);
         accountStore.saveAccount(receiverAccount);
         return saved;
+    }
+
+
+    public String doLogin(@Valid CredentialDTO e) {
+        Account account = accountStore.findAccountByUsr(e.email())
+        .orElseThrow(() -> new PayghostException("login failed"));
+        if ( !EncodeUtils.verify(e.pwd(), account.getPwd())) {
+            throw new PayghostException("login failed");
+        }
+        return String.valueOf(account.getID());
     }
 }
