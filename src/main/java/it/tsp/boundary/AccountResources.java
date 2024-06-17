@@ -52,8 +52,8 @@ public class AccountResources {
                     throw new PayghostException("The two passwords doesn't match!");
                }
 
-               //Account a1 = new Account(account.getFname(), account.getLname(), account.getPwd(), account.getEmail());
-
+               account.setPwd(EncodeUtils.encode(account.getPwd()));
+               
                Account saved = accountStore.saveAccount(account);
 
                if (account.getCredit().compareTo(BigDecimal.ZERO) > 0) {

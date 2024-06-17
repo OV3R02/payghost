@@ -38,6 +38,7 @@ public class PayghostManager {
     public String doLogin(@Valid CredentialDTO e) {
         Account account = accountStore.findAccountByUsr(e.email())
         .orElseThrow(() -> new PayghostException("login failed"));
+        System.out.println();
         if ( !EncodeUtils.verify(e.pwd(), account.getPwd())) {
             throw new PayghostException("login failed");
         }
