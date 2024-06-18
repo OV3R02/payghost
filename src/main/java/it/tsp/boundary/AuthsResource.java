@@ -2,6 +2,8 @@ package it.tsp.boundary;
 
 import it.tsp.control.PayghostManager;
 import it.tsp.dto.CredentialDTO;
+import jakarta.annotation.security.DenyAll;
+import jakarta.annotation.security.PermitAll;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.json.Json;
@@ -14,6 +16,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+@DenyAll
 @RequestScoped
 @Path("/auths")
 public class AuthsResource {
@@ -22,12 +25,13 @@ public class AuthsResource {
     @Inject
     PayghostManager payghostManager;
 
+    @PermitAll
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(@Valid CredentialDTO e){
-        String id = payghostManager.doLogin(e);
-        JsonObject result = Json.createObjectBuilder().add("id", id).build();
+        String token = payghostManager.doLogin(e);
+        JsonObject result = Json.createObjectBuilder().add("token", token).build();
         return Response.ok(result).build();
     } 
 

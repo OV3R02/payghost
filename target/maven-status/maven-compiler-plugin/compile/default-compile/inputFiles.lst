@@ -1,10 +1,12 @@
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\FilterResponse.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\TokenManager.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\RestConfig.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\boundary\AccountResources.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\dto\AccountSlice.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\dto\CredentialDTO.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\RechargeException.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\boundary\AuthsResource.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\PayghostManager.java
-C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\PayghostExceptionMapper.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\AccountStore.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\boundary\PayghostException.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\RechargeStore.java
@@ -12,7 +14,9 @@ C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\EncodeUt
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\control\TransactionStore.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\Account.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\Transaction.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\PayghostExceptionMapper.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\dto\CreateRechargeDTO.java
+C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\FilterLog.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\dto\CreateTransactionDTO.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\Recharge.java
 C:\Users\utentepc\Linguaggio Java\payghost\src\main\java\it\tsp\entity\BaseEntity.java

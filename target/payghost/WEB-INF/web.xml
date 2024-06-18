@@ -10,4 +10,8 @@
         <user>payghost</user>
         <password>payghost</password>
     </data-source>
+    <context-param>
+        <param-name>resteasy.role.based.security</param-name>
+        <param-value>true</param-value>
+    </context-param>
 </web-app>

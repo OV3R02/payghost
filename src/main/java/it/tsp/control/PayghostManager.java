@@ -1,6 +1,8 @@
 package it.tsp.control;
 
 import java.math.BigDecimal;
+
+import it.tsp.TokenManager;
 import it.tsp.boundary.PayghostException;
 import it.tsp.dto.CredentialDTO;
 import it.tsp.entity.Account;
@@ -12,6 +14,9 @@ import jakarta.validation.Valid;
 @RequestScoped
 public class PayghostManager {
     
+    @Inject
+    TokenManager tokenManager;
+
     @Inject
     AccountStore accountStore;
 
@@ -36,12 +41,13 @@ public class PayghostManager {
 
 
     public String doLogin(@Valid CredentialDTO e) {
+        System.out.println(e);
         Account account = accountStore.findAccountByUsr(e.email())
         .orElseThrow(() -> new PayghostException("login failed"));
         System.out.println();
-        if ( !EncodeUtils.verify(e.pwd(), account.getPwd())) {
+        if (!EncodeUtils.verify(e.pwd(), account.getPwd())) {
             throw new PayghostException("login failed");
         }
-        return String.valueOf(account.getID());
+        return tokenManager.generate(account);
     }
 }
